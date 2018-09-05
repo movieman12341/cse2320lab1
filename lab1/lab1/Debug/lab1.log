@@ -1,2 +1,4 @@
 ﻿  main.c
+f:\uta\cse2320\lab1\lab1\main.c(82): warning C4033: 'removeDups' must return a value
+f:\uta\cse2320\lab1\lab1\main.c(89): warning C4716: 'removeDups': must return a value
   lab1.vcxproj -> F:\UTA\CSE2320\lab1\Debug\lab1.exe
