@@ -10,6 +10,7 @@ struct node
 
 //function protos
 int valueSort(const void *a, const void *b);
+int positionSort(const void *a, const void *b);
 int removeDups(struct node * nArr, int nElements);
 
 int main()
@@ -29,25 +30,19 @@ int main()
 		nodeArr[i].value = num;
 		nodeArr[i].position = i;
 	}
-	//initial value sort
 	qsort((void*)nodeArr, numElements, sizeof(nodeArr[0]), valueSort);
+
+	int newNumElements = removeDups(nodeArr, numElements);
 	
-	//after sorting
-	printf("after sorting.\n\n");
-	for (i = 0; i < numElements; i++)
+	qsort((void*)nodeArr, newNumElements, sizeof(nodeArr[0]), positionSort);
+
+
+	//output
+	printf("\n\n%d\n", newNumElements);
+	for (i = 0; i < newNumElements; i++)
 	{
-		printf("%d %d\n", nodeArr[i].value, nodeArr[i].position);
+		printf("%d\n", nodeArr[i].value);
 	}
-
-	//remove extras
-	removeDups(nodeArr, numElements);
-	printf("remove extras\n\n");
-	for (i = 0; i < numElements; i++)
-	{
-		printf("%d %d\n", nodeArr[i].value, nodeArr[i].position);
-	}
-
-
 
 	free(nodeArr);
 	nodeArr = NULL;
@@ -68,37 +63,35 @@ int valueSort(const void * a, const void * b)
 		return value;
 }
 
+int positionSort(const void * a, const void * b)
+{
+	int l = ((struct node*) a)->position;
+	int r = ((struct node*) b)->position;
+	return l - r;
+}
 
 int removeDups(struct node * nArr, int nElements)
 {
-	/*
-	for i < nelements-1
-		cmp j to j+1 value
-		if != values
-			a[i++] = a[j++]
-
-		else if (== values
-			a[i] = 1st value of dup
-			
-	*/
-
-
-
-	int i = 0, j = 0;
-	for (; i < nElements - 1; i++)
+	int i = 0, j = 1, index = 0;
+	for (; i < nElements; i++)
 	{
-		if (nElements == 1 || nElements == 0)
+		if (nElements == 1 || nElements == 0)//already sorted
 			return;
 
 
-		else if (nArr[j].value != nArr[j+1].value)
+		else if (nArr[j].value != nArr[index].value)//j value != value of last array element in correct position
 		{
-			nArr[i] = nArr[j++];
+			index++;
+			nArr[index].value = nArr[j].value;
+			nArr[index].position = nArr[j].position;
+			j++;
+			
 		}
-		else//== values
+		else
 		{
-			nArr[i].value = nArr[j++].value;
+			j++;
 		}
 	}
-	nArr[j++].value = nArr[nElements - 1].value;
+
+	return index;
 }

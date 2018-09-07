@@ -1,4 +1,4 @@
 ﻿  main.c
-f:\uta\cse2320\lab1\lab1\main.c(82): warning C4033: 'removeDups' must return a value
-f:\uta\cse2320\lab1\lab1\main.c(89): warning C4716: 'removeDups': must return a value
-  lab1.vcxproj -> F:\UTA\CSE2320\lab1\Debug\lab1.exe
+d:\documents\github\cse2320lab1\lab1\lab1\main.c(79): warning C4033: 'removeDups' must return a value
+d:\documents\github\cse2320lab1\lab1\lab1\main.c(97): warning C4715: 'removeDups': not all control paths return a value
+  lab1.vcxproj -> D:\Documents\GitHub\cse2320lab1\lab1\Debug\lab1.exe
